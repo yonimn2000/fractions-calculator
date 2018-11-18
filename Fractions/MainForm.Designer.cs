@@ -28,40 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.DecimalNumberTB = new System.Windows.Forms.TextBox();
-            this.RepeatingNumberTB = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.OutputTB = new System.Windows.Forms.TextBox();
             this.VisualizationLB = new System.Windows.Forms.Label();
             this.ErrorLB = new System.Windows.Forms.Label();
             this.IsMixedFractionCB = new System.Windows.Forms.CheckBox();
+            this.CountNUD = new System.Windows.Forms.NumericUpDown();
+            this.NumberTB = new System.Windows.Forms.TextBox();
+            ((System.ComponentModel.ISupportInitialize)(this.CountNUD)).BeginInit();
             this.SuspendLayout();
-            // 
-            // DecimalNumberTB
-            // 
-            this.DecimalNumberTB.Font = new System.Drawing.Font("Miriam Fixed", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DecimalNumberTB.Location = new System.Drawing.Point(12, 25);
-            this.DecimalNumberTB.MaxLength = 20;
-            this.DecimalNumberTB.Name = "DecimalNumberTB";
-            this.DecimalNumberTB.Size = new System.Drawing.Size(208, 24);
-            this.DecimalNumberTB.TabIndex = 0;
-            this.DecimalNumberTB.TextChanged += new System.EventHandler(this.DecimalNumberTB_TextChanged);
-            // 
-            // RepeatingNumberTB
-            // 
-            this.RepeatingNumberTB.Font = new System.Drawing.Font("Miriam Fixed", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.RepeatingNumberTB.Location = new System.Drawing.Point(229, 25);
-            this.RepeatingNumberTB.MaxLength = 18;
-            this.RepeatingNumberTB.Name = "RepeatingNumberTB";
-            this.RepeatingNumberTB.Size = new System.Drawing.Size(186, 24);
-            this.RepeatingNumberTB.TabIndex = 1;
-            this.RepeatingNumberTB.TextChanged += new System.EventHandler(this.RepeatingNumberTB_TextChanged);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 9);
+            this.label1.Location = new System.Drawing.Point(8, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(44, 13);
             this.label1.TabIndex = 2;
@@ -70,11 +51,11 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(226, 9);
+            this.label2.Location = new System.Drawing.Point(365, 9);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(78, 13);
+            this.label2.Size = new System.Drawing.Size(35, 13);
             this.label2.TabIndex = 3;
-            this.label2.Text = "Repeating Part";
+            this.label2.Text = "Count";
             // 
             // OutputTB
             // 
@@ -121,17 +102,42 @@
             this.IsMixedFractionCB.UseVisualStyleBackColor = true;
             this.IsMixedFractionCB.CheckedChanged += new System.EventHandler(this.IsMixedFractionCB_CheckedChanged);
             // 
+            // CountNUD
+            // 
+            this.CountNUD.Font = new System.Drawing.Font("Miriam Fixed", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CountNUD.Location = new System.Drawing.Point(368, 25);
+            this.CountNUD.Maximum = new decimal(new int[] {
+            99,
+            0,
+            0,
+            0});
+            this.CountNUD.Name = "CountNUD";
+            this.CountNUD.Size = new System.Drawing.Size(48, 24);
+            this.CountNUD.TabIndex = 2;
+            this.CountNUD.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.CountNUD.ValueChanged += new System.EventHandler(this.CountNUD_ValueChanged);
+            // 
+            // NumberTB
+            // 
+            this.NumberTB.Font = new System.Drawing.Font("Miriam Fixed", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.NumberTB.Location = new System.Drawing.Point(12, 25);
+            this.NumberTB.MaxLength = 34;
+            this.NumberTB.Name = "NumberTB";
+            this.NumberTB.Size = new System.Drawing.Size(350, 24);
+            this.NumberTB.TabIndex = 1;
+            this.NumberTB.TextChanged += new System.EventHandler(this.NumberTB_TextChanged);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(428, 108);
+            this.Controls.Add(this.NumberTB);
+            this.Controls.Add(this.CountNUD);
             this.Controls.Add(this.IsMixedFractionCB);
             this.Controls.Add(this.OutputTB);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.RepeatingNumberTB);
-            this.Controls.Add(this.DecimalNumberTB);
             this.Controls.Add(this.VisualizationLB);
             this.Controls.Add(this.ErrorLB);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -139,21 +145,21 @@
             this.Name = "MainForm";
             this.Text = "Decimal to Fraction Converter";
             this.Load += new System.EventHandler(this.MainForm_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.CountNUD)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.TextBox DecimalNumberTB;
-        private System.Windows.Forms.TextBox RepeatingNumberTB;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox OutputTB;
         private System.Windows.Forms.Label VisualizationLB;
         private System.Windows.Forms.Label ErrorLB;
         private System.Windows.Forms.CheckBox IsMixedFractionCB;
+        private System.Windows.Forms.NumericUpDown CountNUD;
+        private System.Windows.Forms.TextBox NumberTB;
     }
 }
 

@@ -18,26 +18,15 @@ namespace Fractions
             InitializeComponent();
         }
 
-        private void DecimalNumberTB_TextChanged(object sender, EventArgs e)
-        {
-            //Check correct input nums only
-            Calculate();
-        }
-
-        private void RepeatingNumberTB_TextChanged(object sender, EventArgs e)
-        {
-            Calculate();
-        }
-
         int mode = 0;
         private void Calculate()
         {
-            if (DecimalNumberTB.Text.Length > 0)
+            if (NumberTB.Text.Length>0)
             {
                 try
                 {
                     RepeatingDecimalNumber repeatingDecimalNumber
-                    = new RepeatingDecimalNumber(decimal.Parse(DecimalNumberTB.Text), RepeatingNumberTB.Text);
+                    = new RepeatingDecimalNumber(decimal.Parse(NumberTB.Text), (uint)CountNUD.Value);
                     OutputTB.Text = IsMixedFractionCB.Checked ? repeatingDecimalNumber.GetAsFraction().ToMixedFractionString() : repeatingDecimalNumber.GetAsFraction().ToString();
                     if (mode == 0)
                         VisualizationLB.Text = (repeatingDecimalNumber.IsRepeatingDecimal ? "" : Environment.NewLine) + repeatingDecimalNumber.ToScientificNotationString();
@@ -55,11 +44,6 @@ namespace Fractions
                 ErrorLB.Text = OutputTB.Text = VisualizationLB.Text = "";
         }
 
-        private void MainForm_Load(object sender, EventArgs e)
-        {
-            Calculate();
-        }
-
         private void IsMixedFractionCB_CheckedChanged(object sender, EventArgs e)
         {
             Calculate();
@@ -68,6 +52,21 @@ namespace Fractions
         private void VisualizationLB_Click(object sender, EventArgs e)
         {
             mode = mode == 0 ? 1 : 0;
+            Calculate();
+        }
+
+        private void NumberTB_TextChanged(object sender, EventArgs e)
+        {
+            Calculate();
+        }
+
+        private void CountNUD_ValueChanged(object sender, EventArgs e)
+        {
+            Calculate();
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
             Calculate();
         }
     }
