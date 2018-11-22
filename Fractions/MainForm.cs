@@ -18,30 +18,70 @@ namespace Fractions
             InitializeComponent();
         }
 
-        int mode = 0;
+        int outFractionLableDisplayMode = 0;
         private void Calculate()
         {
-            if (NumberTB.Text.Length>0)
+            try
             {
-                try
-                {
-                    RepeatingDecimalNumber repeatingDecimalNumber
-                    = new RepeatingDecimalNumber(decimal.Parse(NumberTB.Text), (uint)CountNUD.Value);
-                    OutputTB.Text = IsMixedFractionCB.Checked ? repeatingDecimalNumber.GetAsFraction().ToMixedFractionString() : repeatingDecimalNumber.GetAsFraction().ToString();
-                    if (mode == 0)
-                        VisualizationLB.Text = (repeatingDecimalNumber.IsRepeatingDecimal ? "" : Environment.NewLine) + repeatingDecimalNumber.ToScientificNotationString();
-                    else
-                    VisualizationLB.Text = Environment.NewLine+repeatingDecimalNumber.ToString(40);
-                    ErrorLB.Text = "";
-                }
-                catch (Exception e)
-                {
-                    OutputTB.Text = VisualizationLB.Text = "";
-                    ErrorLB.Text = e.Message;
-                }
+                if (DecimalToFractionRB.Checked)
+                    ShowRepeatingDecimalNumber();
+                if (FractionSimplifierRB.Checked)
+                    ShowFractionSimplifier();
+                ErrorLB.Text = "";
+            }
+            catch (Exception e)
+            {
+                ClearOutputs();
+                ErrorLB.Text = e.Message;
+            }
+        }
+
+        private void ShowFractionSimplifier()
+        {
+            Fraction fraction = new Fraction(decimal.Parse(NumeratorInTB.Text == "" ? "0" : NumeratorInTB.Text), decimal.Parse(DenominatorInTB.Text == "" ? "0" : DenominatorInTB.Text));
+            fraction.Whole += long.Parse(WholePartFractionInTB.Text == "" ? "0" : WholePartFractionInTB.Text);
+            Output(fraction.Simplify(), Environment.NewLine + ((decimal)fraction).ToString());
+        }
+
+        private void ShowRepeatingDecimalNumber()
+        {
+            if (DecimalNumberTB.Text.Length > 0)
+            {
+                RepeatingDecimalNumber repeatingDecimalNumber
+                                    = new RepeatingDecimalNumber(decimal.Parse(DecimalNumberTB.Text), (uint)CountNUD.Value);
+                string outText = "";
+
+                if (outFractionLableDisplayMode == 0)
+                    outText = (repeatingDecimalNumber.IsRepeatingDecimal ? "" : Environment.NewLine) + repeatingDecimalNumber.ToScientificNotationString();
+                else
+                    outText = Environment.NewLine + repeatingDecimalNumber.ToString(36);
+                Output(repeatingDecimalNumber.GetAsFraction(), outText);
             }
             else
-                ErrorLB.Text = OutputTB.Text = VisualizationLB.Text = "";
+                ClearOutputs();
+        }
+
+        private void Output(Fraction fraction, string visualizationTB_Text)
+        {
+            if (!IsMixedFractionCB.Checked)
+            {
+                WholePartFractionOutTB.Text = fraction.IsNegative ? "-" : "";
+                NumeratorOutTB.Text = fraction.Absolute().Numerator.ToString();
+                DenominatorOutTB.Text = fraction.Absolute().Denominator.ToString();
+            }
+            else
+            {
+                WholePartFractionOutTB.Text = fraction.Whole.ToString();
+                WholePartFractionOutTB.Text = WholePartFractionOutTB.Text == "0" ? "" : WholePartFractionOutTB.Text;
+                NumeratorOutTB.Text = fraction.RemoveWhole().Absolute().Numerator.ToString();
+                DenominatorOutTB.Text = fraction.RemoveWhole().Absolute().Denominator.ToString();
+            }
+            VisualizationLB.Text = visualizationTB_Text;
+        }
+
+        private void ClearOutputs()
+        {
+            ErrorLB.Text = WholePartFractionOutTB.Text = NumeratorOutTB.Text = DenominatorOutTB.Text = VisualizationLB.Text = "";
         }
 
         private void IsMixedFractionCB_CheckedChanged(object sender, EventArgs e)
@@ -51,7 +91,7 @@ namespace Fractions
 
         private void VisualizationLB_Click(object sender, EventArgs e)
         {
-            mode = mode == 0 ? 1 : 0;
+            outFractionLableDisplayMode = outFractionLableDisplayMode == 0 ? 1 : 0;
             Calculate();
         }
 
@@ -66,6 +106,41 @@ namespace Fractions
         }
 
         private void MainForm_Load(object sender, EventArgs e)
+        {
+            Calculate();
+        }
+
+        private void FractionSimplifierRB_CheckedChanged(object sender, EventArgs e)
+        {
+            DecimalToFractionRB_CheckedChanged(sender, e);
+        }
+
+        private void DecimalToFractionRB_CheckedChanged(object sender, EventArgs e)
+        {
+            if (DecimalToFractionRB.Checked)
+            {
+                DecimalToFractionGB.Enabled = true;
+                FractionSimplifierGB.Enabled = false;
+            }
+            else
+            {
+                DecimalToFractionGB.Enabled = false;
+                FractionSimplifierGB.Enabled = true;
+            }
+            Calculate();
+        }
+
+        private void NumeratorInTB_TextChanged(object sender, EventArgs e)
+        {
+            Calculate();
+        }
+
+        private void DenominatorInTB_TextChanged(object sender, EventArgs e)
+        {
+            Calculate();
+        }
+
+        private void WholePartFractionInTB_TextChanged(object sender, EventArgs e)
         {
             Calculate();
         }
