@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using FractionsLibrary;
 
@@ -24,9 +17,9 @@ namespace Fractions
             try
             {
                 if (DecimalToFractionRB.Checked)
-                    ShowRepeatingDecimalNumber();
+                    CalculateRepeatingDecimalNumber();
                 if (FractionSimplifierRB.Checked)
-                    ShowFractionSimplifier();
+                    CalculateFractionSimplifier();
                 ErrorLB.Text = "";
             }
             catch (Exception e)
@@ -36,32 +29,25 @@ namespace Fractions
             }
         }
 
-        private void ShowFractionSimplifier()
+        private void CalculateFractionSimplifier()
         {
             Fraction fraction = new Fraction(decimal.Parse(NumeratorInTB.Text == "" ? "0" : NumeratorInTB.Text), decimal.Parse(DenominatorInTB.Text == "" ? "0" : DenominatorInTB.Text));
             fraction.Whole += long.Parse(WholePartFractionInTB.Text == "" ? "0" : WholePartFractionInTB.Text);
-            Output(fraction.Simplify(), Environment.NewLine + ((decimal)fraction).ToString());
+            Output(fraction.Simplify(), fraction.GetAsRepeatingDecimalNumber());
         }
 
-        private void ShowRepeatingDecimalNumber()
+        private void CalculateRepeatingDecimalNumber()
         {
             if (DecimalNumberTB.Text.Length > 0)
             {
-                RepeatingDecimalNumber repeatingDecimalNumber
-                                    = new RepeatingDecimalNumber(decimal.Parse(DecimalNumberTB.Text), (uint)CountNUD.Value);
-                string outText = "";
-
-                if (outFractionLableDisplayMode == 0)
-                    outText = (repeatingDecimalNumber.IsRepeatingDecimal ? "" : Environment.NewLine) + repeatingDecimalNumber.ToScientificNotationString();
-                else
-                    outText = Environment.NewLine + repeatingDecimalNumber.ToString(36);
-                Output(repeatingDecimalNumber.GetAsFraction(), outText);
+                RepeatingDecimalNumber repeatingDecimalNumber = new RepeatingDecimalNumber(decimal.Parse(DecimalNumberTB.Text), (uint)CountNUD.Value);
+                Output(repeatingDecimalNumber.GetAsFraction(), repeatingDecimalNumber);
             }
             else
                 ClearOutputs();
         }
 
-        private void Output(Fraction fraction, string visualizationTB_Text)
+        private void Output(Fraction fraction, RepeatingDecimalNumber repeatingDecimalNumber)
         {
             if (!IsMixedFractionCB.Checked)
             {
@@ -76,7 +62,16 @@ namespace Fractions
                 NumeratorOutTB.Text = fraction.RemoveWhole().Absolute().Numerator.ToString();
                 DenominatorOutTB.Text = fraction.RemoveWhole().Absolute().Denominator.ToString();
             }
-            VisualizationLB.Text = visualizationTB_Text;
+            string outText = "";
+            if (outFractionLableDisplayMode == 0)
+            {
+                if (!repeatingDecimalNumber.IsRepeatingDecimal)
+                    outText += Environment.NewLine;
+                outText += repeatingDecimalNumber.ToScientificNotationString();
+            }
+            else
+                outText = Environment.NewLine + repeatingDecimalNumber.ToString(36);
+            VisualizationLB.Text = outText;
         }
 
         private void ClearOutputs()

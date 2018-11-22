@@ -74,7 +74,7 @@
             this.ErrorLB.MaximumSize = new System.Drawing.Size(415, 0);
             this.ErrorLB.Name = "ErrorLB";
             this.ErrorLB.Size = new System.Drawing.Size(34, 13);
-            this.ErrorLB.TabIndex = 6;
+            this.ErrorLB.TabIndex = 4;
             this.ErrorLB.Text = "Error";
             // 
             // IsMixedFractionCB
@@ -85,7 +85,7 @@
             this.IsMixedFractionCB.Location = new System.Drawing.Point(366, 71);
             this.IsMixedFractionCB.Name = "IsMixedFractionCB";
             this.IsMixedFractionCB.Size = new System.Drawing.Size(54, 17);
-            this.IsMixedFractionCB.TabIndex = 9;
+            this.IsMixedFractionCB.TabIndex = 3;
             this.IsMixedFractionCB.Text = "Mixed";
             this.IsMixedFractionCB.UseVisualStyleBackColor = true;
             this.IsMixedFractionCB.CheckedChanged += new System.EventHandler(this.IsMixedFractionCB_CheckedChanged);
@@ -101,7 +101,7 @@
             0});
             this.CountNUD.Name = "CountNUD";
             this.CountNUD.Size = new System.Drawing.Size(48, 24);
-            this.CountNUD.TabIndex = 2;
+            this.CountNUD.TabIndex = 1;
             this.CountNUD.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.MainToolTip.SetToolTip(this.CountNUD, "Count of repeating decimals");
             this.CountNUD.ValueChanged += new System.EventHandler(this.CountNUD_ValueChanged);
@@ -113,7 +113,7 @@
             this.DecimalNumberTB.MaxLength = 34;
             this.DecimalNumberTB.Name = "DecimalNumberTB";
             this.DecimalNumberTB.Size = new System.Drawing.Size(354, 24);
-            this.DecimalNumberTB.TabIndex = 1;
+            this.DecimalNumberTB.TabIndex = 0;
             this.MainToolTip.SetToolTip(this.DecimalNumberTB, "A decimal number");
             this.DecimalNumberTB.TextChanged += new System.EventHandler(this.NumberTB_TextChanged);
             // 
@@ -124,7 +124,7 @@
             this.DecimalToFractionGB.Location = new System.Drawing.Point(25, 12);
             this.DecimalToFractionGB.Name = "DecimalToFractionGB";
             this.DecimalToFractionGB.Size = new System.Drawing.Size(423, 52);
-            this.DecimalToFractionGB.TabIndex = 10;
+            this.DecimalToFractionGB.TabIndex = 1;
             this.DecimalToFractionGB.TabStop = false;
             this.DecimalToFractionGB.Text = "Decimal to Fraction";
             // 
@@ -138,7 +138,7 @@
             this.FractionSimplifierGB.Location = new System.Drawing.Point(25, 70);
             this.FractionSimplifierGB.Name = "FractionSimplifierGB";
             this.FractionSimplifierGB.Size = new System.Drawing.Size(423, 74);
-            this.FractionSimplifierGB.TabIndex = 11;
+            this.FractionSimplifierGB.TabIndex = 3;
             this.FractionSimplifierGB.TabStop = false;
             this.FractionSimplifierGB.Text = "Fraction Simplifier";
             // 
@@ -149,7 +149,7 @@
             this.WholePartFractionInTB.MaxLength = 20;
             this.WholePartFractionInTB.Name = "WholePartFractionInTB";
             this.WholePartFractionInTB.Size = new System.Drawing.Size(200, 34);
-            this.WholePartFractionInTB.TabIndex = 2;
+            this.WholePartFractionInTB.TabIndex = 0;
             this.WholePartFractionInTB.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.WholePartFractionInTB.TextChanged += new System.EventHandler(this.WholePartFractionInTB_TextChanged);
             // 
@@ -160,7 +160,7 @@
             this.DenominatorInTB.MaxLength = 20;
             this.DenominatorInTB.Name = "DenominatorInTB";
             this.DenominatorInTB.Size = new System.Drawing.Size(200, 24);
-            this.DenominatorInTB.TabIndex = 0;
+            this.DenominatorInTB.TabIndex = 2;
             this.DenominatorInTB.TextChanged += new System.EventHandler(this.DenominatorInTB_TextChanged);
             // 
             // NumeratorInTB
@@ -170,7 +170,7 @@
             this.NumeratorInTB.MaxLength = 20;
             this.NumeratorInTB.Name = "NumeratorInTB";
             this.NumeratorInTB.Size = new System.Drawing.Size(200, 24);
-            this.NumeratorInTB.TabIndex = 0;
+            this.NumeratorInTB.TabIndex = 1;
             this.NumeratorInTB.TextChanged += new System.EventHandler(this.NumeratorInTB_TextChanged);
             // 
             // label1
@@ -195,9 +195,9 @@
             this.OutputGB.Location = new System.Drawing.Point(25, 150);
             this.OutputGB.Name = "OutputGB";
             this.OutputGB.Size = new System.Drawing.Size(423, 97);
-            this.OutputGB.TabIndex = 12;
+            this.OutputGB.TabIndex = 4;
             this.OutputGB.TabStop = false;
-            this.OutputGB.Text = "Fraction Simplifier";
+            this.OutputGB.Text = "Output";
             // 
             // WholePartFractionOutTB
             // 
@@ -207,7 +207,7 @@
             this.WholePartFractionOutTB.Name = "WholePartFractionOutTB";
             this.WholePartFractionOutTB.ReadOnly = true;
             this.WholePartFractionOutTB.Size = new System.Drawing.Size(200, 34);
-            this.WholePartFractionOutTB.TabIndex = 2;
+            this.WholePartFractionOutTB.TabIndex = 0;
             this.WholePartFractionOutTB.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // DenominatorOutTB
@@ -218,7 +218,7 @@
             this.DenominatorOutTB.Name = "DenominatorOutTB";
             this.DenominatorOutTB.ReadOnly = true;
             this.DenominatorOutTB.Size = new System.Drawing.Size(200, 24);
-            this.DenominatorOutTB.TabIndex = 0;
+            this.DenominatorOutTB.TabIndex = 2;
             // 
             // NumeratorOutTB
             // 
@@ -228,7 +228,7 @@
             this.NumeratorOutTB.Name = "NumeratorOutTB";
             this.NumeratorOutTB.ReadOnly = true;
             this.NumeratorOutTB.Size = new System.Drawing.Size(200, 24);
-            this.NumeratorOutTB.TabIndex = 0;
+            this.NumeratorOutTB.TabIndex = 1;
             // 
             // label2
             // 
@@ -247,7 +247,8 @@
             this.DecimalToFractionRB.Location = new System.Drawing.Point(5, 35);
             this.DecimalToFractionRB.Name = "DecimalToFractionRB";
             this.DecimalToFractionRB.Size = new System.Drawing.Size(14, 13);
-            this.DecimalToFractionRB.TabIndex = 13;
+            this.DecimalToFractionRB.TabIndex = 0;
+            this.DecimalToFractionRB.TabStop = true;
             this.DecimalToFractionRB.UseVisualStyleBackColor = true;
             this.DecimalToFractionRB.CheckedChanged += new System.EventHandler(this.DecimalToFractionRB_CheckedChanged);
             // 
@@ -257,7 +258,7 @@
             this.FractionSimplifierRB.Location = new System.Drawing.Point(5, 104);
             this.FractionSimplifierRB.Name = "FractionSimplifierRB";
             this.FractionSimplifierRB.Size = new System.Drawing.Size(14, 13);
-            this.FractionSimplifierRB.TabIndex = 13;
+            this.FractionSimplifierRB.TabIndex = 2;
             this.FractionSimplifierRB.UseVisualStyleBackColor = true;
             this.FractionSimplifierRB.CheckedChanged += new System.EventHandler(this.FractionSimplifierRB_CheckedChanged);
             // 
