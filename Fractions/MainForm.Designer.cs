@@ -83,6 +83,7 @@
             this.IsMixedFractionCB.AutoSize = true;
             this.IsMixedFractionCB.Checked = true;
             this.IsMixedFractionCB.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.IsMixedFractionCB.Enabled = false;
             this.IsMixedFractionCB.Location = new System.Drawing.Point(366, 71);
             this.IsMixedFractionCB.Name = "IsMixedFractionCB";
             this.IsMixedFractionCB.Size = new System.Drawing.Size(54, 17);

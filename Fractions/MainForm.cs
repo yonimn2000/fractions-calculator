@@ -56,6 +56,7 @@ namespace Fractions
 
         private void Output(Fraction fraction, string visualizationTB_Text)
         {
+            IsMixedFractionCB.Enabled = (decimal)fraction >= 1;
             if (!IsMixedFractionCB.Checked)
             {
                 WholePartFractionOutTB.Text = fraction.IsNegative ? "-" : "";
