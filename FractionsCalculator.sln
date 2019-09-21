@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2048
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FractionTools", "Fractions\FractionTools.csproj", "{C204CB12-1D48-4FBF-8ED0-FD00B09860F5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FractionsCalculator", "FractionsCalculator\FractionsCalculator.csproj", "{C204CB12-1D48-4FBF-8ED0-FD00B09860F5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

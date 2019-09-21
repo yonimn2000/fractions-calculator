@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Windows.Forms;
-using FractionsLibrary;
+using YonatanMankovich.FractionsLibrary;
 
-namespace Fractions
+namespace YonatanMankovich.FractionsCalculator
 {
     public partial class MainForm : Form
     {
@@ -11,7 +11,7 @@ namespace Fractions
             InitializeComponent();
         }
 
-        int outFractionLableDisplayMode = 0;
+        int outFractionLabelDisplayMode = 0;
         private void Calculate()
         {
             try
@@ -32,7 +32,7 @@ namespace Fractions
         private void CalculateFractionSimplifier()
         {
             Fraction fraction = new Fraction(decimal.Parse(NumeratorInTB.Text == "" ? "0" : NumeratorInTB.Text), decimal.Parse(DenominatorInTB.Text == "" ? "1" : DenominatorInTB.Text));
-            fraction.Whole += decimal.Parse(WholePartFractionInTB.Text == "" ? "0" : WholePartFractionInTB.Text);
+            fraction.SetWhole(fraction.GetWhole() + decimal.Parse(WholePartFractionInTB.Text == "" ? "0" : WholePartFractionInTB.Text));
             Output(fraction.Simplify(), Environment.NewLine + ((decimal)fraction).ToString());
         }
 
@@ -40,12 +40,12 @@ namespace Fractions
         {
             if (DecimalNumberTB.Text.Length > 0)
             {
-                RepeatingDecimalNumber repeatingDecimalNumber
-                                    = new RepeatingDecimalNumber(decimal.Parse(DecimalNumberTB.Text), (uint)CountNUD.Value);
-                string outText = "";
-
-                if (outFractionLableDisplayMode == 0)
-                    outText = (repeatingDecimalNumber.IsRepeatingDecimal ? "" : Environment.NewLine) + repeatingDecimalNumber.ToScientificNotationString();
+                RepeatingDecimalNumber repeatingDecimalNumber = new RepeatingDecimalNumber(decimal.Parse(DecimalNumberTB.Text));
+                CountNUD.Maximum = repeatingDecimalNumber.GetDecimalsLength();
+                repeatingDecimalNumber.RepeatingDecimalsCount = (uint)CountNUD.Value;
+                string outText;
+                if (outFractionLabelDisplayMode == 0)
+                    outText = (repeatingDecimalNumber.IsRepeatingDecimal() ? "" : Environment.NewLine) + repeatingDecimalNumber.ToLineNotationString();
                 else
                     outText = Environment.NewLine + repeatingDecimalNumber.ToString(36);
                 Output(repeatingDecimalNumber.GetAsFraction(), outText);
@@ -59,14 +59,14 @@ namespace Fractions
             IsMixedFractionCB.Enabled = (decimal)fraction >= 1;
             if (!IsMixedFractionCB.Checked)
             {
-                WholePartFractionOutTB.Text = fraction.IsNegative ? "-" : "";
+                WholePartFractionOutTB.Text = fraction.IsNegative() ? "-" : "";
                 NumeratorOutTB.Text = fraction.Absolute().Numerator.ToString();
                 DenominatorOutTB.Text = fraction.Absolute().Denominator.ToString();
             }
             else
             {
-                WholePartFractionOutTB.Text = fraction.Whole.ToString();
-                WholePartFractionOutTB.Text = WholePartFractionOutTB.Text == "0" ? (fraction.IsNegative ? "-" : "") : WholePartFractionOutTB.Text;
+                WholePartFractionOutTB.Text = fraction.GetWhole().ToString();
+                WholePartFractionOutTB.Text = WholePartFractionOutTB.Text == "0" ? (fraction.IsNegative() ? "-" : "") : WholePartFractionOutTB.Text;
                 NumeratorOutTB.Text = fraction.RemoveWhole().Absolute().Numerator.ToString();
                 DenominatorOutTB.Text = fraction.RemoveWhole().Absolute().Denominator.ToString();
             }
@@ -85,7 +85,7 @@ namespace Fractions
 
         private void VisualizationLB_Click(object sender, EventArgs e)
         {
-            outFractionLableDisplayMode = outFractionLableDisplayMode == 0 ? 1 : 0;
+            outFractionLabelDisplayMode = outFractionLabelDisplayMode == 0 ? 1 : 0;
             Calculate();
         }
 

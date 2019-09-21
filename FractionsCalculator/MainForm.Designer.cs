@@ -1,4 +1,4 @@
-﻿namespace Fractions
+﻿namespace YonatanMankovich.FractionsCalculator
 {
     partial class MainForm
     {
@@ -278,7 +278,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "MainForm";
-            this.Text = "Fraction Tools";
+            this.Text = "Fractions Calculator";
             this.Load += new System.EventHandler(this.MainForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.CountNUD)).EndInit();
             this.DecimalToFractionGB.ResumeLayout(false);
