@@ -63,11 +63,20 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="YonatanMankovich.FractionsLibrary">
-      <HintPath>..\..\..\Libraries\FractionsLibrary\FractionsLibrary\bin\Debug\netstandard1.0\YonatanMankovich.FractionsLibrary.dll</HintPath>
+    <Reference Include="YonatanMankovich.Fractions">
+      <HintPath>..\..\..\Libraries\Fractions\RepeatingDecimalNumber\bin\Debug\netstandard1.0\YonatanMankovich.Fractions.dll</HintPath>
+    </Reference>
+    <Reference Include="YonatanMankovich.Fractions.RepeatingDecimalNumbers">
+      <HintPath>..\..\..\Libraries\Fractions\RepeatingDecimalNumber\bin\Debug\netstandard1.0\YonatanMankovich.Fractions.RepeatingDecimalNumbers.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FractionBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="FractionBox.Designer.cs">
+      <DependentUpon>FractionBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -76,6 +85,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FractionBox.resx">
+      <DependentUpon>FractionBox.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
