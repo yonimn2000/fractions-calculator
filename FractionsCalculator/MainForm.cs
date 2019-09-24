@@ -11,6 +11,7 @@ namespace YonatanMankovich.FractionsCalculator
         {
             InitializeComponent();
             simplifierFB.ExceptionOccurred += SimplifierFB_ExceptionOccurred;
+            mathOperatorCB.SelectedIndex = 0;
         }
 
         private void SimplifierFB_ExceptionOccurred(object sender, ExceptionOccurredEventArgs e)
@@ -23,37 +24,61 @@ namespace YonatanMankovich.FractionsCalculator
 
         private void Calculate()
         {
-            if (DecimalToFractionRB.Checked)
-                CalculateRepeatingDecimalNumber();
-            if (FractionSimplifierRB.Checked)
-                CalculateFractionSimplifier();
+            try
+            {
+                if (DecimalToFractionRB.Checked)
+                    CalculateRepeatingDecimalNumber();
+                else if (FractionSimplifierRB.Checked)
+                    Output(new Fraction(simplifierFB.Fraction.Simplify()),
+                        Environment.NewLine + ((decimal)simplifierFB.Fraction).ToString());
+                else if (fractionMathRB.Checked)
+                    CalculateFractionMath();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
-        private void CalculateFractionSimplifier()
+        private void CalculateFractionMath()
         {
-            Output(new Fraction(simplifierFB.Fraction.Simplify()), Environment.NewLine + ((decimal)simplifierFB.Fraction).ToString());
+            Fraction outputFraction = new Fraction();
+            Fraction fraction1 = math1FB.Fraction;
+            Fraction fraction2 = math2FB.Fraction;
+
+            switch (mathOperatorCB.SelectedItem)
+            {
+                case "+": outputFraction = fraction1 + fraction2; break;
+                case "-": outputFraction = fraction1 - fraction2; break;
+                case "x": outputFraction = fraction1 * fraction2; break;
+                case ":": outputFraction = fraction1 / fraction2; break;
+                default: MessageBox.Show("Unknown operation"); break;
+            }
+            Output(outputFraction, Environment.NewLine + ((decimal)outputFraction).ToString());
+
+            fractionComparisonLBL.Text = "Top ";
+            if (fraction1 < fraction2)
+                fractionComparisonLBL.Text += "<";
+            else if (fraction1.Equivalent(fraction2))
+                fractionComparisonLBL.Text += "=";
+            else //if (fraction1 > fraction2)
+                fractionComparisonLBL.Text += ">";
+            fractionComparisonLBL.Text += " Bottom";
         }
 
         private void CalculateRepeatingDecimalNumber()
         {
             if (DecimalNumberTB.Text.Length > 0)
             {
-                try
-                {
-                    RepeatingDecimalNumber repeatingDecimalNumber = new RepeatingDecimalNumber(decimal.Parse(DecimalNumberTB.Text));
-                    CountNUD.Maximum = repeatingDecimalNumber.GetDecimalsLength();
-                    repeatingDecimalNumber.RepeatingDecimalsCount = (uint)CountNUD.Value;
-                    string outText;
-                    if (outFractionLabelDisplayMode == 0)
-                        outText = (repeatingDecimalNumber.IsRepeatingDecimal() ? "" : Environment.NewLine) + repeatingDecimalNumber.ToLineNotationString();
-                    else
-                        outText = Environment.NewLine + repeatingDecimalNumber.ToString(36);
-                    Output(repeatingDecimalNumber.GetAsFraction(), outText);
-                }
-                catch (Exception e)
-                {
-                    MessageBox.Show(e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                RepeatingDecimalNumber repeatingDecimalNumber = new RepeatingDecimalNumber(decimal.Parse(DecimalNumberTB.Text));
+                CountNUD.Maximum = repeatingDecimalNumber.GetDecimalsLength();
+                repeatingDecimalNumber.RepeatingDecimalsCount = (uint)CountNUD.Value;
+                string outText;
+                if (outFractionLabelDisplayMode == 0)
+                    outText = (repeatingDecimalNumber.IsRepeatingDecimal() ? "" : Environment.NewLine) + repeatingDecimalNumber.ToLineNotationString();
+                else
+                    outText = Environment.NewLine + repeatingDecimalNumber.ToString(36);
+                Output(repeatingDecimalNumber.GetAsFraction(), outText);
             }
             else
                 ClearOutputs();
@@ -72,54 +97,22 @@ namespace YonatanMankovich.FractionsCalculator
             resultFB.Clear();
         }
 
-        private void IsMixedFractionCB_CheckedChanged(object sender, EventArgs e)
-        {
-            Calculate();
-        }
-
         private void VisualizationLB_Click(object sender, EventArgs e)
         {
             outFractionLabelDisplayMode = outFractionLabelDisplayMode == 0 ? 1 : 0;
             Calculate();
         }
 
-        private void NumberTB_TextChanged(object sender, EventArgs e)
+        private void RequestCalculation(object sender, EventArgs e)
         {
             Calculate();
         }
 
-        private void CountNUD_ValueChanged(object sender, EventArgs e)
+        private void RadioButton_CheckChanged(object sender, EventArgs e)
         {
-            Calculate();
-        }
-
-        private void MainForm_Load(object sender, EventArgs e)
-        {
-            Calculate();
-        }
-
-        private void FractionSimplifierRB_CheckedChanged(object sender, EventArgs e)
-        {
-            DecimalToFractionRB_CheckedChanged(sender, e);
-        }
-
-        private void DecimalToFractionRB_CheckedChanged(object sender, EventArgs e)
-        {
-            if (DecimalToFractionRB.Checked)
-            {
-                DecimalToFractionGB.Enabled = true;
-                FractionSimplifierGB.Enabled = false;
-            }
-            else
-            {
-                DecimalToFractionGB.Enabled = false;
-                FractionSimplifierGB.Enabled = true;
-            }
-            Calculate();
-        }
-
-        private void simplifyFB_ValueChanged(object sender, EventArgs e)
-        {
+            DecimalToFractionGB.Enabled = DecimalToFractionRB.Checked;
+            FractionSimplifierGB.Enabled = FractionSimplifierRB.Checked;
+            fractionMathGB.Enabled = fractionMathRB.Checked;
             Calculate();
         }
     }

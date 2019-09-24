@@ -46,7 +46,7 @@
             this.wholeTB.Location = new System.Drawing.Point(3, 3);
             this.wholeTB.MaxLength = 20;
             this.wholeTB.Name = "wholeTB";
-            this.wholeTB.Size = new System.Drawing.Size(279, 54);
+            this.wholeTB.Size = new System.Drawing.Size(194, 54);
             this.wholeTB.TabIndex = 3;
             this.wholeTB.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.wholeTB.TextChanged += new System.EventHandler(this.Fraction_TextChanged);
@@ -59,7 +59,7 @@
             this.denominatorTB.Location = new System.Drawing.Point(3, 33);
             this.denominatorTB.MaxLength = 20;
             this.denominatorTB.Name = "denominatorTB";
-            this.denominatorTB.Size = new System.Drawing.Size(105, 24);
+            this.denominatorTB.Size = new System.Drawing.Size(190, 24);
             this.denominatorTB.TabIndex = 6;
             this.denominatorTB.TextChanged += new System.EventHandler(this.Fraction_TextChanged);
             // 
@@ -71,7 +71,7 @@
             this.numeratorTB.Location = new System.Drawing.Point(3, 3);
             this.numeratorTB.MaxLength = 20;
             this.numeratorTB.Name = "numeratorTB";
-            this.numeratorTB.Size = new System.Drawing.Size(105, 24);
+            this.numeratorTB.Size = new System.Drawing.Size(190, 24);
             this.numeratorTB.TabIndex = 4;
             this.numeratorTB.TextChanged += new System.EventHandler(this.Fraction_TextChanged);
             // 
@@ -90,7 +90,7 @@
             this.splitContainer.Panel2.Controls.Add(this.numeratorTB);
             this.splitContainer.Panel2.Controls.Add(this.denominatorTB);
             this.splitContainer.Size = new System.Drawing.Size(400, 61);
-            this.splitContainer.SplitterDistance = 285;
+            this.splitContainer.SplitterDistance = 200;
             this.splitContainer.TabIndex = 7;
             // 
             // FractionBox
