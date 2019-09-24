@@ -11,8 +11,8 @@ A simple tool for math with fractions and more.
 
 ## Screenshots
 
-![screenshot1](media/screenshot1.png)
+![screenshot1](media/screenshotA.png)
 
-![screenshot2](media/screenshot2.png)
+![screenshot2](media/screenshotB.png)
 
-![screenshot3](media/screenshot3.png)
+![screenshot3](media/screenshotC.png)
