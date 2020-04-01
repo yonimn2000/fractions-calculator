@@ -2,10 +2,6 @@
 
 A simple tool for math with fractions and more.
 
-## Dependency
-
-[YonatanMankovich.Fractions](https://github.com/yonimn2000/fractions)
-
 ## Features
 
 * Add, subtract, multiply, and divide fractions.
